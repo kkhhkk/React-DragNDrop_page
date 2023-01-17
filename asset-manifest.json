@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/React-DragNDrop_page/static/css/main.c2cab247.css",
+    "main.js": "/React-DragNDrop_page/static/js/main.1c7571b1.js",
+    "index.html": "/React-DragNDrop_page/index.html",
+    "main.c2cab247.css.map": "/React-DragNDrop_page/static/css/main.c2cab247.css.map",
+    "main.1c7571b1.js.map": "/React-DragNDrop_page/static/js/main.1c7571b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2cab247.css",
+    "static/js/main.1c7571b1.js"
+  ]
+}
