@@ -69,6 +69,7 @@ function DeleteModal({ id, boardId }: IId) {
         </Button>
       </DelButton>
       <Modal
+        style={{ color: "black" }}
         show={show}
         onHide={() => handleClose}
         onEscapeKeyDown={onEscapeKeyDown}

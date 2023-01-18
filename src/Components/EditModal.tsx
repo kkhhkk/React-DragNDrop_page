@@ -86,7 +86,7 @@ function EditModal({ id, boardId }: IId) {
           <span>✏️</span>
         </Button>
       </EditButton>
-      <Modal show={show} onHide={() => handleClose}>
+      <Modal style={{ color: "black" }} show={show} onHide={() => handleClose}>
         <Modal.Header>
           <Modal.Title>수정</Modal.Title>
         </Modal.Header>

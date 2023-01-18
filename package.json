@@ -1,4 +1,5 @@
 {
+  "homepage": "http://kkhhkk.github.io/React-DragNDrop_page",
   "name": "dragdrop-project-react",
   "version": "0.1.0",
   "private": true,
@@ -52,6 +53,5 @@
     "@types/react-beautiful-dnd": "^13.1.3",
     "@types/styled-components": "^5.1.26",
     "gh-pages": "^4.0.0"
-  },
-  "homepage": "http://kkhhkk.github.io/React-DragNDrop_page"
+  }
 }
