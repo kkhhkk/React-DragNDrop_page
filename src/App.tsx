@@ -7,6 +7,7 @@ import Board from "./Components/Board";
 import CreateBoard from "./Components/CreateBoard";
 import { darkTheme, lightTheme } from "./theme";
 import ToggleButton from "./Components/ToggleButton";
+import { AnimatePresence, motion } from "framer-motion";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -108,6 +109,7 @@ const Boards = styled.div<IShow>`
   position: absolute;
   opacity: ${(props) => (props.show ? 1 : 0.4)};
 `;
+
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [show, setShow] = useRecoilState(showState);
@@ -171,7 +173,7 @@ function App() {
           <button onClick={onClick}>✚</button>
         </AddBoard>
         <Wrapper>
-          {show && <CreateBoard />}
+          <AnimatePresence>{show && <CreateBoard />}</AnimatePresence>
           <Boards show={!show}>
             {Object.keys(toDos).map((boardId) => (
               <Board key={boardId} boardId={boardId} toDos={toDos[boardId]} />

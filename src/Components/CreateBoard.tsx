@@ -1,9 +1,10 @@
+import { motion } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { showState, toDoState } from "../atom";
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
   z-index: 1;
 `;
 
-const Question = styled.div`
+const Question = styled(motion.div)`
   flex-direction: column;
   text-align: center;
   background-color: ${(props) => props.theme.boardColor};
@@ -54,6 +55,13 @@ const ErrorMessage = styled.div`
   color: pink;
 `;
 
+const CreateBoardVar = {
+  start: { opacity: 0, scale: 0 },
+  end: { opacity: 1, scale: 1, rotateZ: 360 },
+  exit: { opacity: 0, scale: 0 },
+  y: 100,
+};
+
 function CreateBoard() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [value, setValue] = useState("");
@@ -91,7 +99,16 @@ function CreateBoard() {
   });
   return (
     <Wrapper>
-      <Question>
+      <Question
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          rotateY: 360,
+          transition: { duration: 0.6 },
+        }}
+        exit={{ opacity: 0, scale: 0, y: -50 }}
+      >
         <Title>
           <div>보드 추가</div>
           <button onClick={onClick}>X</button>
