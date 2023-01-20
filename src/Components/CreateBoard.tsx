@@ -107,7 +107,7 @@ function CreateBoard() {
           rotateY: 360,
           transition: { duration: 0.6 },
         }}
-        exit={{ opacity: 0, scale: 0, y: -50 }}
+        exit={{ opacity: 0, scale: 0, y: -50, transition: { duration: 0.3 } }}
       >
         <Title>
           <div>보드 추가</div>
