@@ -3,7 +3,8 @@ import styled from "styled-components";
 import DraggableCard from "./DraggableCard";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atom";
+import { editShowState, edittagetState, IToDo, toDoState } from "../atom";
+import React from "react";
 
 const Container = styled.div``;
 
@@ -28,11 +29,14 @@ const DeleteBoard = styled.button`
   border: 1px solid ${(props) => props.theme.cardColor};
 `;
 
-const Title = styled.div`
+const Title = styled.button`
   font-size: 20px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 15px;
+  background-color: ${(props) => props.theme.boardColor};
+  color: ${(props) => props.theme.textColor};
+  border: 0;
 `;
 
 interface IDroppableProps {
@@ -48,7 +52,7 @@ const Area = styled.div<IDroppableProps>`
     props.isDraggingOver
       ? props.theme.bgColor
       : props.draggingFromThisWith
-      ? "#C09D93"
+      ? props.theme.boardColor
       : props.theme.boardColor};
   transition: background-color 0.3s ease-in-out;
 `;
@@ -79,7 +83,9 @@ interface IBoardProps {
 }
 
 function Board({ toDos, boardId }: IBoardProps) {
+  const setEditShow = useSetRecoilState(editShowState);
   const setToDos = useSetRecoilState(toDoState);
+  const setTargetId = useSetRecoilState(edittagetState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const onValid = ({ todo }: IForm) => {
     const newToDo = {
@@ -101,13 +107,19 @@ function Board({ toDos, boardId }: IBoardProps) {
       return { ...newBoards };
     });
   };
+  const EditClick = (e: React.FormEvent<HTMLButtonElement>) => {
+    setEditShow(true);
+    setTargetId(e.currentTarget.id);
+  };
   return (
     <Container>
       <Wrapper>
         <DeleteBoard name={boardId} onClick={DelClick}>
           ✕
         </DeleteBoard>
-        <Title>{boardId}</Title>
+        <Title id={boardId} onClick={EditClick}>
+          {boardId}
+        </Title>
         <Form onSubmit={handleSubmit(onValid)}>
           <input
             {...register("todo", { required: true })}

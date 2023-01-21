@@ -27,3 +27,13 @@ export const modeState = atom({
   key: "mode",
   default: true,
 });
+
+export const editShowState = atom({
+  key: "editshow",
+  default: false,
+});
+
+export const edittagetState = atom({
+  key: "editTargetId",
+  default: "",
+});

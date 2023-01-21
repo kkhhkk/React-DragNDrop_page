@@ -1,13 +1,20 @@
 import { useEffect } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { modeState, showState, toDoState } from "./atom";
+import {
+  editShowState,
+  edittagetState,
+  modeState,
+  showState,
+  toDoState,
+} from "./atom";
 import Board from "./Components/Board";
 import CreateBoard from "./Components/CreateBoard";
 import { darkTheme, lightTheme } from "./theme";
 import ToggleButton from "./Components/ToggleButton";
 import { AnimatePresence } from "framer-motion";
+import EditBoard from "./Components/EditBoard";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -114,6 +121,7 @@ function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [show, setShow] = useRecoilState(showState);
   const [themeMode, setThemeMode] = useRecoilState(modeState);
+  const targetId = useRecoilValue(edittagetState);
   useEffect(() => {
     const localData = localStorage.getItem("todo");
     const localTheme = localStorage.getItem("theme");
@@ -159,7 +167,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todo", JSON.stringify(toDos));
   }, [toDos]);
-
+  const editShow = useRecoilValue(editShowState);
   const onClick = (e: React.FormEvent<HTMLButtonElement>) => {
     setShow(!show);
   };
@@ -168,6 +176,9 @@ function App() {
     <ThemeProvider theme={themeMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <DragDropContext onDragEnd={onDragEnd}>
+        <AnimatePresence>
+          {editShow && <EditBoard targetId={targetId} />}
+        </AnimatePresence>
         <ToggleButton />
         <AddBoard>
           <button onClick={onClick}>✚</button>

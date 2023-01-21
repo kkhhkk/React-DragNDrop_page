@@ -55,13 +55,6 @@ const ErrorMessage = styled.div`
   color: pink;
 `;
 
-const CreateBoardVar = {
-  start: { opacity: 0, scale: 0 },
-  end: { opacity: 1, scale: 1, rotateZ: 360 },
-  exit: { opacity: 0, scale: 0 },
-  y: 100,
-};
-
 function CreateBoard() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const [value, setValue] = useState("");
