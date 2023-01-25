@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/React-DragNDrop_page/static/css/main.c2cab247.css",
-    "main.js": "/React-DragNDrop_page/static/js/main.744799a5.js",
+    "main.js": "/React-DragNDrop_page/static/js/main.599a74e2.js",
     "index.html": "/React-DragNDrop_page/index.html",
     "main.c2cab247.css.map": "/React-DragNDrop_page/static/css/main.c2cab247.css.map",
-    "main.744799a5.js.map": "/React-DragNDrop_page/static/js/main.744799a5.js.map"
+    "main.599a74e2.js.map": "/React-DragNDrop_page/static/js/main.599a74e2.js.map"
   },
   "entrypoints": [
     "static/css/main.c2cab247.css",
-    "static/js/main.744799a5.js"
+    "static/js/main.599a74e2.js"
   ]
 }
