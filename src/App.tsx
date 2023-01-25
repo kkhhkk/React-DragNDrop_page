@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import {
   editShowState,
@@ -83,7 +83,7 @@ a {
 const AddBoard = styled.div`
   display: flex;
   justify-content: right;
-  padding-right: 20px;
+  padding-right: 50px;
   button {
     padding: 10px;
     font-size: 25px;

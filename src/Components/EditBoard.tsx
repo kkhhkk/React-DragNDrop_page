@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useLayoutEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
   z-index: 2;
 `;
 
-const Box = styled.div`
+const Box = styled(motion.div)`
   width: 350px;
   height: 200px;
   border-radius: 13px;
@@ -50,10 +51,6 @@ const EditInput = styled.input`
   font-weight: 100;
   font-size: 15px;
 `;
-interface IEditForm {
-  boardId: string;
-  targetId: string;
-}
 
 interface IEditBoardForm {
   targetId: string;
@@ -62,25 +59,51 @@ interface IEditBoardForm {
 function EditBoard({ targetId }: IEditBoardForm) {
   const setEditShow = useSetRecoilState(editShowState);
   const [toDos, setToDos] = useRecoilState(toDoState);
-  const { register, handleSubmit, setValue } = useForm();
-  const editInputRef = useRef<HTMLInputElement>(null);
-
-  const onValid = (boardId: any) => {
-    console.log(boardId);
+  const { register, handleSubmit, setValue, setFocus } = useForm();
+  const onValid = ({ boardId }: any) => {
+    const newToDos = { ...toDos };
+    Object.keys(newToDos).map((key) => {
+      delete newToDos[key];
+      if (key === targetId) {
+        newToDos[boardId] = toDos[key];
+      } else {
+        newToDos[key] = toDos[key];
+      }
+    });
     setValue("boardId", "");
+    setToDos(newToDos);
+    setEditShow(false);
   };
   useLayoutEffect(() => {
-    if (editInputRef !== null) {
-      editInputRef.current?.focus();
-    }
-  });
+    setFocus("boardId");
+  }, [setFocus]);
   const onClick = () => {
     setEditShow(false);
   };
-
+  useEffect(() => {
+    document.addEventListener("keydown", function (event) {
+      const key = event.key;
+      if (key === "Escape") {
+        setEditShow(false);
+      }
+    });
+  }, [setEditShow]);
+  const BoxVariant = {
+    start: {
+      scale: 0,
+      y: 20,
+      opacity: 0,
+    },
+    end: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.4 },
+    },
+    exit: { scale: 0, y: -40, transition: { duration: 0.4 } },
+  };
   return (
     <Wrapper>
-      <Box>
+      <Box variants={BoxVariant} initial="start" animate="end" exit="exit">
         <Title>
           <div>Board 수정</div>
           <button onClick={onClick}>X</button>
